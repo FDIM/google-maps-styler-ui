@@ -42,10 +42,25 @@ function init() {
   mapStyleRenderer = new MapStyleRenderer(mapStyleDiv, styles);
   mapStyleRenderer.addSelectionListener(loadMapStyle);
   mapStyleRenderer.addTrashcanListener(deleteStyle);
-  
+ 
   huePicker = new HuePicker(document.getElementById('huePicker'));
   huePicker.addListener(setHue);
-
+  var initialStyles = [];
+  if(window.location.search && window.location.search.length>3){
+	  try{
+		  initialStyles = JSON.parse(decodeURIComponent(window.location.search.substr(1)));
+	  }catch(e){
+		  alert("unable to parse provided json");
+	  }
+  }
+  initialStyles.forEach(function(item){
+	if(item.featureType && item.stylers && item.stylers.length){
+		currentStyle = styles.length;
+		styles.push(item);
+		mapStyleRenderer.refresh(currentStyle);
+	}
+  });
+	
   addStyle();
 }
 
