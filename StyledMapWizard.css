@@ -342,7 +342,7 @@ body {
 }
 
 #helpButton {
-  margin-left: 40px;
+  float: right;
 }
 
 input:focus, select:focus {
