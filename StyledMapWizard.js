@@ -727,6 +727,9 @@ function findStyler(styler) {
 function showJson() {
   var jsonStyles = [];
   for (var i = 0; i < styles.length; i++) {
+	if(!styles[i].featureType || !styles[i].stylers || !styles[i].stylers.length){
+	  continue;
+	}
     var hasPreviousEntry = false;
     jsonStyles[i] = '{\n'
     if (styles[i].featureType != 'all') {
@@ -774,6 +777,14 @@ function showJson() {
   popup.appendChild(document.createTextNode(json));
   popup.style.display = "block";
   document.getElementById('lightbox').style.display = "block";
+  
+  var link = document.createElement('a');
+  link.style.display = "block";
+  link.style.marginTop = '20px';
+  link.href = "http://fdim.github.io/google-maps-styler-ui/?"+encodeURIComponent(json);
+  link.appendChild(document.createTextNode('Shareable link'));
+
+  popup.appendChild(link);
 }
 
 function closeJson() {
