@@ -54,7 +54,7 @@ function init() {
 	  }
   }
   initialStyles.forEach(function(item){
-	if(item.featureType && item.stylers && item.stylers.length){
+	if(item.stylers && item.stylers.length){
 		currentStyle = styles.length;
 		styles.push(item);
 		mapStyleRenderer.refresh(currentStyle);
@@ -727,7 +727,7 @@ function findStyler(styler) {
 function showJson() {
   var jsonStyles = [];
   for (var i = 0; i < styles.length; i++) {
-	if(!styles[i].featureType || !styles[i].stylers || !styles[i].stylers.length){
+	if(!styles[i].stylers || !styles[i].stylers.length){
 	  continue;
 	}
     var hasPreviousEntry = false;
